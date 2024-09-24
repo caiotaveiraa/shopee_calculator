@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Vendas Shopee</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Calculadora de Vendas Shopee</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="valor_compra">Valor de Compra:</label>
+                <input type="number" step="0.01" name="valor_compra" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="valor_venda">Valor de Venda (opcional):</label>
+                <input type="number" step="0.01" name="valor_venda" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Calcular</button>
+        </form>
+
+        {% if valor_minimo_venda is not none %}
+            <div class="result">
+                <strong>Valor Mínimo de Venda para não ter prejuízo:</strong> R$ {{ valor_minimo_venda | round(2) }}
+            </div>
+        {% endif %}
+
+        {% if lucro is not none %}
+            <div class="result">
+                {% if lucro >= 0 %}
+                    <strong>Lucro com o valor de venda proposto:</strong> R$ {{ lucro | round(2) }}
+                {% else %}
+                    <strong>Prejuízo com o valor de venda proposto:</strong> R$ {{ lucro | round(2) }}
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if valor_recebido is not none %}
+            <div class="result">
+                <strong>Valor recebido da Shopee:</strong> R$ {{ valor_recebido | round(2) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
